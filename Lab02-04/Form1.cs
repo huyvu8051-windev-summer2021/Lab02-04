@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -118,13 +119,9 @@ namespace Lab02_04
                 kh = GetKhachHangFromInputField();
                 SaveKhachHang(kh);
             }
-            catch(ValidateInputFieldException ex)
+            catch(Exception ex)
             {
                 MessageBox.Show("ERROR: " + ex.Message);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("ERROR: " + ex.ToString());
             }
         }
 
@@ -171,27 +168,115 @@ namespace Lab02_04
         // Lấy thông tin khách hàng từ field nhập liệu
         private KhachHang GetKhachHangFromInputField()
         {
+            errKhachHang.Clear();
             try
             {
-                long stk = long.Parse(txtStk.Text);
-                string hoTen = txtTen.Text;
-                string diaChi = txtDiaChi.Text;
-                double soTien = double.Parse(txtSoTien.Text);
+                long stk = GetStkFromField();
+                string hoTen = GetTenFromField();
+                string diaChi = GetDiaChiFromField();
+                double soTien = GetSoTienFromField();
                 return new KhachHang(stk, hoTen, diaChi, soTien);
             }
-            catch(ValidateInputFieldException ex)
+            catch (Exception ex)
             {
-                throw new Exception("Không thể lấy thông tin khách hàng");
+                throw ex;
             }
-            catch
+        }
+
+        private long GetStkFromField()
+        {
+            string s = txtStk.Text;
+
+            if(s.Length == 0)
             {
-                throw new Exception("Không thể lấy thông tin khách hàng");
+                errKhachHang.SetError(txtStk, "Số tài khoản sai định dạng");
+                throw new FormatException("Vui lòng không để trống số tài khoản!");
+            }
+
+            string pattern = "^[0-9]+$";
+            Match m = Regex.Match(s, pattern);
+            if (!m.Success)
+            {
+                errKhachHang.SetError(txtStk ,"Số tài khoản sai định dạng");
+                throw new FormatException("Sai định dạng!\n Số tài khoản phải là số.");
+            }
+            else
+            {
+                return long.Parse(s);
+            }
+        }
+        private string GetTenFromField()
+        {
+            string s = txtTen.Text;
+
+            if (s.Length == 0)
+            {
+                errKhachHang.SetError(txtTen, "Tên khách hàng sai định dạng");
+                throw new FormatException("Vui lòng không để trống tên khách hàng!");
+            }
+            return s;
+        }
+        private string GetDiaChiFromField()
+        {
+            string s = txtDiaChi.Text;
+
+            if (s.Length == 0)
+            {
+                errKhachHang.SetError(txtDiaChi, "Địa chỉ sai định dạng");
+                throw new FormatException("Vui lòng không để trống địa chỉ");
+            }
+            return s;
+        }
+
+        private double GetSoTienFromField()
+        {
+            string s = txtSoTien.Text;
+
+            if (s.Length == 0)
+            {
+                errKhachHang.SetError(txtSoTien, "Số tiền sai định dạng");
+                throw new FormatException("Vui lòng không để trống số tiền");
+            }
+
+            string pattern = "^[0-9\\.]+$";
+            Match m = Regex.Match(s, pattern);
+            if (!m.Success)
+            {
+                errKhachHang.SetError(txtSoTien, "Số tiền sai định dạng");
+                throw new FormatException("Sai định dạng!\n Số tiền phải là số.");
+            }
+            else
+            {
+                return double.Parse(s);
             }
         }
 
         public static bool IsNumber(string s)
         {
             return Microsoft.VisualBasic.Information.IsNumeric(s);
+        }
+
+        private void btnXoa_Click(object sender, EventArgs e)
+        {
+            KhachHang kh;
+            try
+            {
+                long stk = GetStkFromField();
+                kh = FindKhachHangByStk(stk);
+                DeleteKhachHangByStk(kh.Stk);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("ERROR: " + ex.Message);
+            }
+        }
+
+        private void DeleteKhachHangByStk(long stk)
+        {
+            ls.RemoveAll(s => s.Stk == stk);
+            // reload listView
+            lsvDSKH.Clear();
+            LoadListView();
         }
     }
 }

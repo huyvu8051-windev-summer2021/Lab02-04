@@ -29,6 +29,7 @@ namespace Lab02_04
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -48,10 +49,12 @@ namespace Lab02_04
             this.panel4 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.txtTongTien = new System.Windows.Forms.TextBox();
+            this.errKhachHang = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errKhachHang)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -136,6 +139,7 @@ namespace Lab02_04
             this.btnXoa.TabIndex = 6;
             this.btnXoa.Text = "Xoá";
             this.btnXoa.UseVisualStyleBackColor = true;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // btnThoat
             // 
@@ -217,7 +221,7 @@ namespace Lab02_04
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(455, 22);
+            this.label6.Location = new System.Drawing.Point(528, 22);
             this.label6.Name = "label6";
             this.label6.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.label6.Size = new System.Drawing.Size(75, 20);
@@ -227,10 +231,14 @@ namespace Lab02_04
             // txtTongTien
             // 
             this.txtTongTien.Enabled = false;
-            this.txtTongTien.Location = new System.Drawing.Point(536, 15);
+            this.txtTongTien.Location = new System.Drawing.Point(609, 15);
             this.txtTongTien.Name = "txtTongTien";
-            this.txtTongTien.Size = new System.Drawing.Size(236, 27);
+            this.txtTongTien.Size = new System.Drawing.Size(163, 27);
             this.txtTongTien.TabIndex = 5;
+            // 
+            // errKhachHang
+            // 
+            this.errKhachHang.ContainerControl = this;
             // 
             // Form1
             // 
@@ -250,6 +258,7 @@ namespace Lab02_04
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errKhachHang)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -276,6 +285,7 @@ namespace Lab02_04
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtTongTien;
         private System.Windows.Forms.ListView lsvDSKH;
+        private System.Windows.Forms.ErrorProvider errKhachHang;
     }
 }
 

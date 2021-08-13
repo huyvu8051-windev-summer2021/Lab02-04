@@ -189,7 +189,7 @@ namespace Lab02_04
 
             if(s.Length == 0)
             {
-                errKhachHang.SetError(txtStk, "Số tài khoản sai định dạng");
+                errKhachHang.SetError(txtStk, "Không được để trống");
                 throw new FormatException("Vui lòng không để trống số tài khoản!");
             }
 
@@ -211,7 +211,7 @@ namespace Lab02_04
 
             if (s.Length == 0)
             {
-                errKhachHang.SetError(txtTen, "Tên khách hàng sai định dạng");
+                errKhachHang.SetError(txtTen, "Không được để trống");
                 throw new FormatException("Vui lòng không để trống tên khách hàng!");
             }
             return s;
@@ -222,7 +222,7 @@ namespace Lab02_04
 
             if (s.Length == 0)
             {
-                errKhachHang.SetError(txtDiaChi, "Địa chỉ sai định dạng");
+                errKhachHang.SetError(txtDiaChi, "Không được để trống");
                 throw new FormatException("Vui lòng không để trống địa chỉ");
             }
             return s;
@@ -234,7 +234,7 @@ namespace Lab02_04
 
             if (s.Length == 0)
             {
-                errKhachHang.SetError(txtSoTien, "Số tiền sai định dạng");
+                errKhachHang.SetError(txtSoTien, "Không được để trống");
                 throw new FormatException("Vui lòng không để trống số tiền");
             }
 

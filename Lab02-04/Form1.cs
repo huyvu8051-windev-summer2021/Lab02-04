@@ -34,7 +34,7 @@ namespace Lab02_04
             {
                 kh = new KhachHang();
                 kh.Stk = rd.Next(10000000, 99999999);
-                kh.HoTen = i % 2 == 0 ? "Huy Vũ " + i : "Nguyễn Phương Ngân " + i;
+                kh.HoTen = i % 2 == 0 ? "Huy Vũ " + i : "Hu Vuỹ " + i;
                 kh.DiaChi = i % 2 == 0 ? "Khu 2 Hoàng Cương Thanh Ba Phú Thọ " + i : "Quảng Ngãi " + i;
                 kh.SoTien = Math.Round(rd.NextDouble() * 10000000, 2);
                 ls.Add(kh);

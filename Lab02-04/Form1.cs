@@ -54,6 +54,7 @@ namespace Lab02_04
   
         }
 
+        // In item của listview
         private void LoadListViewItem()
         {
             ListViewItem item;
@@ -68,6 +69,7 @@ namespace Lab02_04
             txtTongTien.Text = KhachHang.GetCurrencyFormat(tongTien);
         }
 
+        // In header của listview
         private void LoadHeaderListView()
         {
             lsvDSKH.Columns.Add("STT");
@@ -111,7 +113,7 @@ namespace Lab02_04
         }
 
         
-
+        // Bắt sự kiện click nút Thêm/Cập nhật
         private void btnLuu_Click(object sender, EventArgs e)
         {
             KhachHang kh;
@@ -126,6 +128,7 @@ namespace Lab02_04
             }
         }
 
+        // Lưu khách hàng
         private void SaveKhachHang(KhachHang kh)
         {
             try
@@ -166,7 +169,7 @@ namespace Lab02_04
                 throw new Exception("Không thể xuất thông tin khách hàng!");
             }
         }
-        // Lấy thông tin khách hàng từ field nhập liệu
+        // Lấy thông tin khách hàng từ các textbox
         private KhachHang GetKhachHangFromInputField()
         {
             errKhachHang.Clear();
@@ -184,6 +187,7 @@ namespace Lab02_04
             }
         }
 
+        // Lấy số tài khoản từ textbox
         private long GetStkFromField()
         {
             string s = txtStk.Text;
@@ -206,6 +210,8 @@ namespace Lab02_04
                 return long.Parse(s);
             }
         }
+
+        // Lấy tên khách hàng từ textbox
         private string GetTenFromField()
         {
             string s = txtTen.Text;
@@ -217,6 +223,7 @@ namespace Lab02_04
             }
             return s;
         }
+        // Lấy địa chỉ từ textbox
         private string GetDiaChiFromField()
         {
             string s = txtDiaChi.Text;
@@ -228,6 +235,8 @@ namespace Lab02_04
             }
             return s;
         }
+        
+        // lấy số tiền từ textbox
 
         private double GetSoTienFromField()
         {

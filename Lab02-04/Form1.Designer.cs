@@ -126,7 +126,7 @@ namespace Lab02_04
             this.btnLuu.Location = new System.Drawing.Point(322, 135);
             this.btnLuu.Name = "btnLuu";
             this.btnLuu.Size = new System.Drawing.Size(128, 29);
-            this.btnLuu.TabIndex = 7;
+            this.btnLuu.TabIndex = 5;
             this.btnLuu.Text = "Thêm/Cập Nhật";
             this.btnLuu.UseVisualStyleBackColor = true;
             this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click);
@@ -146,9 +146,10 @@ namespace Lab02_04
             this.btnThoat.Location = new System.Drawing.Point(556, 135);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(94, 29);
-            this.btnThoat.TabIndex = 5;
+            this.btnThoat.TabIndex = 7;
             this.btnThoat.Text = "Thoát";
             this.btnThoat.UseVisualStyleBackColor = true;
+            this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 
             // txtSoTien
             // 

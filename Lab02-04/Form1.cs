@@ -44,6 +44,7 @@ namespace Lab02_04
         // làm mới danh sách khách hàng
         void LoadListView()
         {
+            lsvDSKH.Clear();
             LoadHeaderListView();
             LoadListViewItem();
 
@@ -133,10 +134,12 @@ namespace Lab02_04
                 temp.HoTen = kh.HoTen;
                 temp.DiaChi = kh.DiaChi;
                 temp.SoTien = kh.SoTien;
+                MessageBox.Show("Cập nhật dữ liệu thành công!");
             }
             catch (KhachHangNotFoundException)
             {
                 ls.Add(kh);
+                MessageBox.Show("Thêm mới dữ liệu thành công!");
             }
             catch (Exception ex)
             {
@@ -144,8 +147,6 @@ namespace Lab02_04
             }
             finally
             {
-                // reload listView
-                lsvDSKH.Clear();
                 LoadListView();
             }
         }
@@ -245,24 +246,29 @@ namespace Lab02_04
                 errKhachHang.SetError(txtSoTien, "Số tiền sai định dạng");
                 throw new FormatException("Sai định dạng!\n Số tiền phải là số.");
             }
-            else
+            try
             {
                 return double.Parse(s);
             }
+            catch
+            {
+                throw new FormatException("Sai định dạng!\n Số tiền phải là số.");
+            }
         }
 
-        public static bool IsNumber(string s)
-        {
-            return Microsoft.VisualBasic.Information.IsNumeric(s);
-        }
-
+        // Bắt sự kiện click xoá tài khoản
         private void btnXoa_Click(object sender, EventArgs e)
         {
+
             KhachHang kh;
             try
             {
                 long stk = GetStkFromField();
                 kh = FindKhachHangByStk(stk);
+                DialogResult dr = MessageBox.Show("Xác nhận xoá tài khoản?", "", MessageBoxButtons.OKCancel);
+
+                if (dr == DialogResult.Cancel) return;
+
                 DeleteKhachHangByStk(kh.Stk);
             }
             catch(Exception ex)
@@ -271,12 +277,21 @@ namespace Lab02_04
             }
         }
 
+        // Xoá khách hàng bằng số tài khoản
         private void DeleteKhachHangByStk(long stk)
         {
             ls.RemoveAll(s => s.Stk == stk);
-            // reload listView
-            lsvDSKH.Clear();
+            
             LoadListView();
+        }
+
+        // Bắt sự kiện thoát ứng dụng
+        private void btnThoat_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("Xác nhận thoát?", "", MessageBoxButtons.OKCancel);
+
+            if (dr == DialogResult.Cancel) return;
+            Application.Exit();
         }
     }
 }
